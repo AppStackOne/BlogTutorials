@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  namespace: blog
+  labels:
+    app: blog
+    release: 3.38.2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog
+      release: 3.38.2
+  template:
+    metadata:
+      labels:
+        app: blog
+        release: 3.38.2
+    spec:
+      volumes:
+      - name: blog-content
+        persistentVolumeClaim:
+          claimName: blog-pvc
+      containers:
+      - name: blog
+        image: ghost:3.38.2-alpine
+        env:
+        - name: url
+          value: https://<domain-name>
+        volumeMounts:
+        - name: blog-content
+          mountPath: /var/lib/ghost/content
+        resources:
+          limits:
+            cpu: "1"
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        ports:
+        - name: http
+          containerPort: 2368
+          protocol: TCP
+      restartPolicy: Always

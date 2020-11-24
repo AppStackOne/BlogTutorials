@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: blog
+  namespace: blog
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  tls:
+  - hosts:
+    - <domain-name>
+    secretName: blog-tls
+  rules:
+  - host: <domain-name>
+    http:
+      paths:
+      - path: /(.*)
+        backend:
+          serviceName: blog
+          servicePort: 80
