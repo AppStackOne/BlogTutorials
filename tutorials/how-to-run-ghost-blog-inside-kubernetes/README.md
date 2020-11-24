@@ -1,10 +1,12 @@
 # How to run Ghost blog inside Kubernetes
 
-Example to follow with :
+Follow with :
 
 https://blog.appstack.one/how-to-run-ghost-blog-inside-kubernetes/
 
-Execute thoses lines to deploy a Ghost blog!
+![Ghost](https://ghost.org/images/logo.svg)
+
+Execute thoses lines to deploy!
 ```
 kubectl create namespace blog
 kubectl apply -f .\blog-persistent-volume.yml --namespace=blog
