@@ -7,7 +7,7 @@ https://blog.appstack.one/how-to-run-ghost-blog-inside-kubernetes/
 ![Ghost](https://ghost.org/images/logo.svg)
 
 Execute thoses lines to deploy!
-```
+```powershell
 kubectl create namespace blog
 kubectl apply -f .\blog-persistent-volume.yml --namespace=blog
 kubectl apply -f .\blog-persistent-volume-claim.yml --namespace=blog
